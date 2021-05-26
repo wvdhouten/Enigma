@@ -1,7 +1,7 @@
 namespace Enigma.Core
 {
     using System;
-    using global::Enigma.Core.Utils;
+    using Enigma.Core.Utils;
 
     public class Rotor
     {
