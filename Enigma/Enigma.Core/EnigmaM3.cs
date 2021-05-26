@@ -1,9 +1,9 @@
 namespace Enigma.Core
 {
-    using System;
     using System.Text;
+    using Enigma.Core.Config;
 
-    public class Enigma
+    public class EnigmaM3
     {
         public Rotor LeftRotor { get; set; }
 
@@ -15,59 +15,56 @@ namespace Enigma.Core
 
         public Plugboard Plugboard { get; set; }
 
-        public Enigma(string[] rotors, int[] rotorPositions, int[] ringSettings, string reflector, string plugboardConnections)
+        public EnigmaM3(string[] rotors, int[] rotorPositions, int[] ringSettings, string reflector, string plugboardConnections)
         {
             LeftRotor = Rotor.Create(rotors[0], rotorPositions[0], ringSettings[0]);
             MiddleRotor = Rotor.Create(rotors[1], rotorPositions[1], ringSettings[1]);
             RightRotor = Rotor.Create(rotors[2], rotorPositions[2], ringSettings[2]);
             Reflector = Reflector.Create(reflector);
-            Plugboard = new Plugboard(plugboardConnections);
+            Plugboard = Plugboard.Create(plugboardConnections);
         }
 
-        public Enigma(EnigmaKey key) : this(key.Rotors, key.Positions, key.Rings, "B", key.Plugboard)
+        public EnigmaM3(EnigmaM3Config config)
         {
+            LeftRotor = Rotor.Create(config.LeftRotor);
+            MiddleRotor = Rotor.Create(config.MiddleRotor);
+            RightRotor = Rotor.Create(config.RightRotor);
+            Reflector = Reflector.Create(config.Reflector);
+            Plugboard = Plugboard.Create(config.Plugboard);
         }
 
         public void Rotate()
         {
-            //  If middle rotor notch - double-stepping
             if (MiddleRotor.IsAtNotch())
             {
-                MiddleRotor.TurnOver();
-                LeftRotor.TurnOver();
+                // Middle rotor double-steps.
+                MiddleRotor.Rotate();
+                LeftRotor.Rotate();
             }
 
-            //  If left-rotor notch
             if (RightRotor.IsAtNotch())
             {
-                MiddleRotor.TurnOver();
+                MiddleRotor.Rotate();
             }
-
-            //  Increment right-most rotor
-            RightRotor.TurnOver();
+            RightRotor.Rotate();
         }
 
         public int Encrypt(int c)
         {
             Rotate();
 
-            //  Plugboard in
             c = Plugboard.Forward(c);
 
-            //  Right to left
             c = RightRotor.Forward(c);
             c = MiddleRotor.Forward(c);
             c = LeftRotor.Forward(c);
 
-            //  Reflector
             c = Reflector.Forward(c);
 
-            //  Left to right
             c = LeftRotor.Backward(c);
             c = MiddleRotor.Backward(c);
             c = RightRotor.Backward(c);
 
-            //  Plugboard out
             c = Plugboard.Forward(c);
 
             return c;
@@ -76,8 +73,6 @@ namespace Enigma.Core
         public string Encrypt(string input)
         {
             input = input.ToUpper();
-
-            Console.WriteLine(input);
 
             var output = new StringBuilder();
             foreach (var c in input)

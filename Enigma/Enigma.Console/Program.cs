@@ -1,6 +1,8 @@
 namespace Enigma.Console
 {
     using System;
+    using Enigma.Core;
+    using Enigma.Core.Config;
 
     public class Program
     {
@@ -12,8 +14,18 @@ namespace Enigma.Console
 
             //var startTime = DateTime.Now;
 
-            var ciphertext = "oivaa vrrvk khrut cjojv edtwu gdnxl vvemf a";
-            var enigma = new Core.Enigma(new[] { "II", "V", "III" }, new[] { 7, 4, 19 }, new[] { 12, 2, 20 }, "B", "AF TV KO BL RW");
+            var ciphertext = "jgbfa xqodz fxkkw nfval bfgoy dyhlg y";
+
+            var config = new EnigmaM3Config
+            {
+                LeftRotor = { Name = "VI", Position = 1, RingSetting = 1 },
+                MiddleRotor = { Name = "I", Position = 17, RingSetting = 1 },
+                RightRotor = { Name = "III", Position = 12, RingSetting = 1 },
+                Reflector = "B",
+                Plugboard = "bq cr di ej kw mt os px uz gh"
+            };
+
+            var enigma = new EnigmaM3(config);
             var decipheredText = enigma.Encrypt(ciphertext);
 
             Console.WriteLine(decipheredText);
