@@ -5,15 +5,15 @@ namespace Enigma.Core
 
     public class EnigmaM3
     {
-        public Rotor LeftRotor { get; set; }
+        public Rotor LeftRotor { get; private set; }
 
-        public Rotor MiddleRotor { get; set; }
+        public Rotor MiddleRotor { get; private set; }
 
-        public Rotor RightRotor { get; set; }
+        public Rotor RightRotor { get; private set; }
 
-        public Reflector Reflector { get; set; }
+        public Reflector Reflector { get; private set; }
 
-        public Plugboard Plugboard { get; set; }
+        public Plugboard Plugboard { get; private set; }
 
         public EnigmaM3(string[] rotors, int[] rotorPositions, int[] ringSettings, string reflector, string plugboardConnections)
         {
@@ -59,7 +59,7 @@ namespace Enigma.Core
             c = MiddleRotor.Forward(c);
             c = LeftRotor.Forward(c);
 
-            c = Reflector.Forward(c);
+            c = Reflector.Resolve(c);
 
             c = LeftRotor.Backward(c);
             c = MiddleRotor.Backward(c);

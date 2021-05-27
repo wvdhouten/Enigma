@@ -1,15 +1,14 @@
 namespace Enigma.Core
 {
     using System;
-    using Core.Utils;
 
     public class Reflector
     {
-        private readonly int[] _wiring;
+        public int[] Wiring { get; private set; }
 
         private Reflector(string encoding)
         {
-            _wiring = Wiring.Decode(encoding);
+            Wiring = Utils.Wiring.Decode(encoding);
         }
 
         public static Reflector Create(string name)
@@ -22,9 +21,9 @@ namespace Enigma.Core
             };
         }
 
-        public int Forward(int c)
+        public int Resolve(int c)
         {
-            return _wiring[c];
+            return Wiring[c];
         }
     }
 }
