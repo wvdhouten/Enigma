@@ -39,7 +39,7 @@ namespace Enigma.Core
                 "II" => new Rotor("II", "AJDKSIRUXBLHWTMCQGZNPYFVOE", position, ringSetting, 5),
                 "III" => new Rotor("III", "BDFHJLCPRTXVZNYEIWGAKMUSQO", position, ringSetting, 22),
                 "IV" => new Rotor("IV", "ESOVPZJAYQUIRHXLNFTGKDCMWB", position, ringSetting, 10),
-                "V" => new Rotor("V", "VZBRGITYUPSDNHLXAWMJQOFECK", position, ringSetting, 0), //26
+                "V" => new Rotor("V", "VZBRGITYUPSDNHLXAWMJQOFECK", position, ringSetting, 26),
                 "VI" => new Rotor("VI", "JPGVOUMFYQBENHZRDKASXLICTW", position, ringSetting, null),
                 "VII" => new Rotor("VII", "NZJHGRCXMYSWBOUFAIVLPEKQDT", position, ringSetting, null),
                 "VIII" => new Rotor("VIII", "FKQHTLXOCBJSPDZRAMEWNIUYGV", position, ringSetting, null),
@@ -67,14 +67,14 @@ namespace Enigma.Core
         public bool IsAtNotch()
         {
             return _hasDoubleNotch
-                ? RotorPosition == 13 || RotorPosition == 0 //26
+                ? RotorPosition == 13 || RotorPosition == 26
                 : _notchPosition == RotorPosition;
 
         }
 
         public void Rotate()
         {
-            RotorPosition = (RotorPosition + 1) % 26;
+            RotorPosition = RotorPosition % 26 + 1;
         }
     }
 
