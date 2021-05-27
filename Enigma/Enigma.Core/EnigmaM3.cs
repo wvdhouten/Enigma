@@ -53,7 +53,7 @@ namespace Enigma.Core
         {
             Rotate();
 
-            c = Plugboard.Forward(c);
+            c = Plugboard.Resolve(c);
 
             c = RightRotor.Forward(c);
             c = MiddleRotor.Forward(c);
@@ -65,7 +65,7 @@ namespace Enigma.Core
             c = MiddleRotor.Backward(c);
             c = RightRotor.Backward(c);
 
-            c = Plugboard.Forward(c);
+            c = Plugboard.Resolve(c);
 
             return c;
         }

@@ -5,11 +5,11 @@ namespace Enigma.Core
 
     public class Plugboard
     {
-        private readonly int[] _wiring;
+        public int[] Wiring { get; private set; }
 
         private Plugboard(string connections)
         {
-            _wiring = DecodePlugboard(connections);
+            Wiring = DecodePlugboard(connections);
         }
 
         public static Plugboard Create(string connections)
@@ -17,9 +17,9 @@ namespace Enigma.Core
             return new Plugboard(connections.ToUpper());
         }
 
-        public int Forward(int c)
+        public int Resolve(int c)
         {
-            return _wiring[c];
+            return Wiring[c];
         }
 
         private static int[] DefaultPlugboard()
@@ -33,14 +33,14 @@ namespace Enigma.Core
             return mapping;
         }
 
-        public static int[] DecodePlugboard(string plugboard)
+        private static int[] DecodePlugboard(string plugboard)
         {
             if (string.IsNullOrEmpty(plugboard))
             {
                 return DefaultPlugboard();
             }
 
-            var pairings = Regex.Split(plugboard, "[^a-zA-Z]");
+            var pairings = Regex.Split(plugboard, "[^A-Z]");
             var pluggedCharacters = new HashSet<int>();
             var mapping = DefaultPlugboard();
 
