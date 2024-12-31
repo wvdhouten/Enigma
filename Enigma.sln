@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31313.79
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigma.Core", "Enigma.Core\Enigma.Core.csproj", "{45781273-DD2F-4EC8-9C7A-644D93245977}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigma.Core", "src\Enigma.Core\Enigma.Core.csproj", "{45781273-DD2F-4EC8-9C7A-644D93245977}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C9E76D1-B6AA-4AAC-A04E-92E343839FF3}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigma.Console", "Enigma.Console\Enigma.Console.csproj", "{7C0C247F-597E-4C90-99D5-2F66D3A047A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enigma.Console", "src\Enigma.Console\Enigma.Console.csproj", "{7C0C247F-597E-4C90-99D5-2F66D3A047A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigma.Tests", "Enigma.Tests\Enigma.Tests.csproj", "{C0D22D5E-9F7F-4CE0-B5CC-E5A4D72E396C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enigma.Tests", "tests\Enigma.Tests\Enigma.Tests.csproj", "{C0D22D5E-9F7F-4CE0-B5CC-E5A4D72E396C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
