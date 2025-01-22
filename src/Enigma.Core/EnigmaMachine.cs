@@ -2,7 +2,7 @@ using System.Text;
 using Enigma.Core.Config;
 
 namespace Enigma.Core;
-public class EnigmaM3
+public class EnigmaMachine
 {
     public CharacterSet CharacterSet { get; }
 
@@ -16,7 +16,9 @@ public class EnigmaM3
 
     public Plugboard Plugboard { get; }
 
-    public EnigmaM3(EnigmaM3Config config)
+    public int? BlockSize { get; set; } = 5;
+
+    public EnigmaMachine(EnigmaM3Config config)
     {
         CharacterSet = CharacterSet.Default;
         Plugboard = Plugboard.Create(config.Plugboard, CharacterSet);
@@ -26,7 +28,7 @@ public class EnigmaM3
         Reflector = Reflector.CreateKnown(config.Reflector);
     }
 
-    public EnigmaM3(EnigmaMachineConfig config)
+    public EnigmaMachine(EnigmaMachineConfig config)
     {
         CharacterSet = config.CharacterSet;
         Plugboard = Plugboard.Create(config.Plugboard, CharacterSet);
@@ -36,14 +38,16 @@ public class EnigmaM3
         Reflector = Reflector.Create(config.Reflector, CharacterSet);
     }
 
-    public EnigmaM3(CharacterSet characterSet, out EnigmaMachineConfig config)
+    public EnigmaMachine(CharacterSet characterSet, out EnigmaMachineConfig config, int? seed = null)
     {
+        Random random = seed.HasValue ? new(seed.Value) : new();
+
         CharacterSet = characterSet;
-        Plugboard = Plugboard.CreateRandom(out string connections, Convert.ToInt32(Math.Floor(CharacterSet.Characters.Length / 4d)), CharacterSet);
-        LeftRotor = Rotor.CreateRandom(out RotorConfig leftRotorConfig, CharacterSet);
-        MiddleRotor = Rotor.CreateRandom(out RotorConfig middleRotorConfig, CharacterSet);
-        RightRotor = Rotor.CreateRandom(out RotorConfig rightRotorConfig, CharacterSet);
-        Reflector = Reflector.CreateRandom(out string encoding, CharacterSet);
+        Plugboard = Plugboard.CreateRandom(out string connections, Convert.ToInt32(Math.Floor(CharacterSet.Characters.Length / 4d)), CharacterSet, random);
+        LeftRotor = Rotor.CreateRandom(out RotorConfig leftRotorConfig, CharacterSet, random);
+        MiddleRotor = Rotor.CreateRandom(out RotorConfig middleRotorConfig, CharacterSet, random);
+        RightRotor = Rotor.CreateRandom(out RotorConfig rightRotorConfig, CharacterSet, random);
+        Reflector = Reflector.CreateRandom(out string encoding, CharacterSet, random);
 
         config = new EnigmaMachineConfig
         {
@@ -71,10 +75,8 @@ public class EnigmaM3
         RightRotor.Rotate();
     }
 
-    public string Encrypt(string input, bool skipUnknownCharacters = true, char? fallbackCharacter = null)
+    public string Encipher(string input, bool skipUnknownCharacters = true, char? fallbackCharacter = null)
     {
-        input = input.ToUpper();
-
         var output = new StringBuilder();
         foreach (var c in input)
         {
@@ -87,7 +89,7 @@ public class EnigmaM3
                 throw new IndexOutOfRangeException($"Character '{c}' not found in character set.");
             }
 
-            if (output.Length % 6 == 5)
+            if (BlockSize is not null && output.Length % (BlockSize + 1) == BlockSize)
                 output.Append(' ');
 
             output.Append(Encrypt(index));

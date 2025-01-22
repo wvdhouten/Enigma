@@ -1,14 +1,15 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Enigma.Core.Extensions;
+﻿namespace Enigma.Core.Extensions;
 internal static class ArrayExtensions
 {
-    private static readonly Random random = new();
-
-    public static string Shuffle(this string source) => new(source.ToCharArray().Shuffle());
-
-    public static TEntity[] Shuffle<TEntity>(this TEntity[] array)
+    public static string Shuffle(this string source, Random? random = null)
     {
+        return new(source.ToCharArray().Shuffle(random));
+    }
+
+    public static TEntity[] Shuffle<TEntity>(this TEntity[] array, Random? random = null)
+    {
+        random ??= new();
+
         for (int i = 0; i < array.Length; i++)
         {
             int j = random.Next(i + 1);
@@ -18,8 +19,33 @@ internal static class ArrayExtensions
         return array;
     }
 
-    public static string TakeRandom(this string source, out char value)
+    public static string SwapPairs(this string source, Random? random = null)
     {
+        random ??= new();
+
+        var array = new char[source.Length];
+        var remaining = source.ToList();
+        while (remaining.Count > 1)
+        {
+            var a = remaining[random.Next(0, remaining.Count)];
+            var b = remaining[random.Next(0, remaining.Count)];
+            array[source.IndexOf(a)] = b;
+            array[source.IndexOf(b)] = a;
+            remaining.Remove(a);
+            remaining.Remove(b);
+        }
+        if (remaining.Count == 1)
+        {
+            array[source.IndexOf(remaining[0])] = remaining[0];
+        }
+
+        return new(array);
+    }
+
+    public static string TakeRandom(this string source, out char value, Random? random = null)
+    {
+        random ??= new();
+
         int randomIndex = random.Next(0, source.Length);
         value = source[randomIndex];
         return source.Remove(randomIndex, 1);

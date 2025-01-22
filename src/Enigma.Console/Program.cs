@@ -6,23 +6,24 @@ using Enigma.Core.Config;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
-        var ciphertext = "IFRGRGBLXJJUMQKFFGMDRGXRHBRGWGFVXAQICWNEOMNAHPGMEGBILRBAEHYFNWSDSNIQPSHSWDVMLQLDTWSVDANGIQZFQUEHGSVDCDHDEFDMFCMIFPCFJPFKZHLGRXMWWHZLSLSOVWVGMZFBTPHCTZFWPOWNHGHFWHVNSRYAVUIBXXNSMGIYYUKDPWICGOZRHMVKSJTHWFMJNFOMRGPQVECDSNWOAIEVSBUPJAOJBYKUPCZNCHYGSWVKCADNIXBSPDGFFDYMHOVYXIORUUGNDFKZGLNQKSFIHPEFU";
+        var input = " jJAWUMhnSqVqCQp KasxrmgCZHinILIDZgwZmfxHXqT";
 
-        var config = new EnigmaM3Config
+        var characterSet = new CharacterSet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .");
+        var enigma = new EnigmaMachine(new EnigmaMachineConfig
         {
-            LeftRotor = { Name = "II", Position = 17, RingSetting = 11 },
-            MiddleRotor = { Name = "IV", Position = 1, RingSetting = 7 },
-            RightRotor = { Name = "III", Position = 17, RingSetting = 8 },
-            Reflector = "B",
-            Plugboard = "SH XW EP AZ KC UJ RO"
-        };
+            CharacterSet = characterSet,
+            Plugboard = "KhgCkpODjRorEuxqGbVJyidQWH",
+            LeftRotor = new RotorConfig { Encoding = "Y.OZdwpIakLobKnDzCxShHjUcifgNtBurq RFevlWmJsPGTQMVXAyE", NotchPositions = [1], RingSetting = 49, Position = 48 },
+            MiddleRotor = new RotorConfig { Encoding = "KQtyUXavbRfPrLBAZwHTElFJxqSeCkmDuiIsMon GcNO.jhVzWgYdp", NotchPositions = [44], RingSetting = 2, Position = 0 },
+            RightRotor = new RotorConfig { Encoding = "KixJIRLdVcCuBnErWQmhbpkAPjqXNzyYfvgsMalD.UF TwoeOZGHtS", NotchPositions = [27], RingSetting = 18, Position = 14 },
+            Reflector = "bacHIXYvLoBTtRjsqMpmUhSQGEDkNAzPydeW.irCVFxnwluOJfg ZK"
+        }) { BlockSize = null };
 
-        var enigma = new EnigmaM3(config);
-        var decipheredText = enigma.Encrypt(ciphertext);
+        var output = enigma.Encipher(input);
 
-        Console.WriteLine(decipheredText);
+        Console.WriteLine(output);
         Console.ReadLine();
     }
 }

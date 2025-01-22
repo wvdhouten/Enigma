@@ -5,22 +5,13 @@ using Enigma.Core.Config;
 using Enigma.Core.Extensions;
 using Enigma.Core.Utils;
 
-/// <summary>
-/// 
-/// </summary>
 public class Rotor
 {
     private readonly int[] _forwardWiring;
     private readonly int[] _backwardWiring;
 
-    /// <summary>
-    /// Gets the current position of the rotor.
-    /// </summary>
     internal int Position { get; private set; }
 
-    /// <summary>
-    /// Gets the ring setting of the rotor.
-    /// </summary>
     internal int RingSetting { get; }
 
     internal int[] NotchPositions { get; }
@@ -65,14 +56,13 @@ public class Rotor
         return new Rotor(encoding, position, ringSetting, notchPositions, characterSet);
     }
 
-    public static Rotor CreateRandom(out RotorConfig config, CharacterSet? characterSet)
+    public static Rotor CreateRandom(out RotorConfig config, CharacterSet? characterSet, Random? random = null)
     {
-        Random random = new();
-
+        random ??= new();
         characterSet ??= CharacterSet.Default;
         config = new RotorConfig
         {
-            Encoding = characterSet.Characters.Shuffle(),
+            Encoding = characterSet.Characters.Shuffle(random),
             Position = random.Next(0, characterSet.Characters.Length - 1),
             RingSetting = random.Next(0, characterSet.Characters.Length - 1),
             NotchPositions = [random.Next(0, characterSet.Characters.Length - 1)]
@@ -81,12 +71,11 @@ public class Rotor
         return new Rotor(config.Encoding, config.Position, config.RingSetting, config.NotchPositions, characterSet);
     }
 
-    public static Rotor CreateRandom(out string encoding, out int position, out int ringSetting, out int[] notchPositions, CharacterSet? characterSet)
+    public static Rotor CreateRandom(out string encoding, out int position, out int ringSetting, out int[] notchPositions, CharacterSet? characterSet, Random? random = null)
     {
-        Random random = new();
-
+        random ??= new();
         characterSet ??= CharacterSet.Default;
-        encoding = characterSet.Characters.Shuffle();
+        encoding = characterSet.Characters.Shuffle(random);
         position = random.Next(0, characterSet.Characters.Length - 1);
         ringSetting = random.Next(0, characterSet.Characters.Length - 1);
         notchPositions = [random.Next(0, characterSet.Characters.Length - 1)];

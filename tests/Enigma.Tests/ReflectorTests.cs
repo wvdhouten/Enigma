@@ -13,10 +13,10 @@ public class ReflectorTests
         var reflectorName = string.Empty;
 
         // Act
-        void initializer() => Reflector.CreateKnown(reflectorName);
+        void action() => Reflector.CreateKnown(reflectorName);
 
         // Assert
-        Assert.Throws<Exception>(initializer);
+        Assert.Throws<ArgumentOutOfRangeException>(action);
     }
 
     [Fact]
