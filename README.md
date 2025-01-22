@@ -13,10 +13,6 @@
     </a>
 </p>
 
-<p align="center">
-    <!-- LOGO GOES HERE -->
-</p>
-
 <p align="center" style="font-size: 3em;">
     <b>Enigma</b>
 </p>
@@ -29,7 +25,7 @@ The project offers 3 different ways to configure the Enigma Machine. The default
 
 ## Getting Started
 
-<!-- TODO -->
+### Installation
 
 The solution is implemented as a class library that can be integrated in other .NET Projects. (It currently does not have a NuGet package, so it needs to be compiled and added manually.)
 
@@ -97,38 +93,11 @@ var enigma = new EnigmaMachine(characterSet, out var config, 1337) { BlockSize =
 var output = enigma.Encipher(input);
 ```
 
-## Table of Contents
-
-<ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#getting-started">Getting started</li>
-    <li><a href="#samples">Demo</a></li>
-    <li><a href="#roadmap">Project Roadmap</a></li>
-    <li><a href="#documentation">Documentation</a></li>
-    <li><a href="#contributors">Contributors</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-    <li><a href="#feedback">Feedback</a></li>
-    <li><a href="#license">License</a></li>
-</ul>
-
-<p align="right"><a href="#top">back to top ⬆️</a></p>
-
 ## Roadmap
 
-- [x] Update README.
-
-<p align="right"><a href="#top">back to top ⬆️</a></p>
-
-## Documentation
-
-<!-- TODO -->
-
-## Acknowledgments
-
-- [Make a Readme](https://www.makeareadme.com/)
-- [Shields](https://shields.io/)
-
-<p align="right"><a href="#top">back to top ⬆️</a></p>
+- [ ] Streamline validators for Reflector, Plugboard and Rotors.
+- [ ] Add alternative Enigma Machine configurations (M4 etc.)
+- [ ] Add missing unit tests
 
 ## Feedback
 
@@ -136,7 +105,7 @@ If you encounter any problems or have any suggestions, please feel free to open 
 
 ## Contributing
 
-<!-- TODO -->
+Feel free to submit Feedback or PRs.
 
 ## Contributors
 
@@ -146,5 +115,3 @@ If you encounter any problems or have any suggestions, please feel free to open 
 
 ## License
 - [MIT License](./LICENSE)
-
-<p align="right"><a href="#top">back to top ⬆️</a></p>
