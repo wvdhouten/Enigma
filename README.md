@@ -1,21 +1,9 @@
-<p id="top" align="center">
-    <a href="https://github.com/wvdhouten/enigma/blob/main/LICENSE">
-        <img alt="Github License" src="https://img.shields.io/github/license/wvdhouten/enigma?style=for-the-badge&color=skyblue" />
-    </a>
-    <a href="https://github.com/wvdhouten/enigma/stargazers">
-        <img alt="Github Stars" src="https://img.shields.io/github/stars/wvdhouten/enigma?style=for-the-badge&color=gold" />
-    </a>
-    <a href="https://github.com/wvdhouten/enigma/issues">
-        <img alt="GitHub Issues" src="https://img.shields.io/github/issues/wvdhouten/enigma?style=for-the-badge&color=plum" />
-    </a>
-    <a href="https://github.com/wvdhouten/enigma/network">
-        <img alt="GitHub Forks" src="https://img.shields.io/github/forks/wvdhouten/enigma?style=for-the-badge&color=lightgreen">
-    </a>
-</p>
+# Enigma
 
-<p align="center" style="font-size: 3em;">
-    <b>Enigma</b>
-</p>
+[![Github License](https://img.shields.io/github/license/wvdhouten/enigma?style=for-the-badge&color=skyblue)](https://github.com/wvdhouten/enigma/blob/main/LICENSE)
+[![Github Stars](https://img.shields.io/github/stars/wvdhouten/enigma?style=for-the-badge&color=gold)](https://github.com/wvdhouten/enigma/stargazers)
+[![Github Issues](https://img.shields.io/github/issues/wvdhouten/enigma?style=for-the-badge&color=plum)](https://github.com/wvdhouten/enigma/issues)
+[![Github Forks](https://img.shields.io/github/forks/wvdhouten/enigma?style=for-the-badge&color=lightgreen)](https://github.com/wvdhouten/enigma/network)
 
 ## About
 
