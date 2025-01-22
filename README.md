@@ -3,13 +3,13 @@
         <img alt="Github License" src="https://img.shields.io/github/license/wvdhouten/enigma?style=for-the-badge&color=skyblue" />
     </a>
     <a href="https://github.com/wvdhouten/enigma/stargazers">
-        <img alt="Github License" src="https://img.shields.io/github/stars/wvdhouten/enigma?style=for-the-badge&color=gold" />
+        <img alt="Github Stars" src="https://img.shields.io/github/stars/wvdhouten/enigma?style=for-the-badge&color=gold" />
     </a>
     <a href="https://github.com/wvdhouten/enigma/issues">
-        <img alt="GitHub issues" src="https://img.shields.io/github/issues/wvdhouten/enigma?style=for-the-badge&color=plum" />
+        <img alt="GitHub Issues" src="https://img.shields.io/github/issues/wvdhouten/enigma?style=for-the-badge&color=plum" />
     </a>
     <a href="https://github.com/wvdhouten/enigma/network">
-        <img alt="GitHub forks" src="https://img.shields.io/github/forks/wvdhouten/enigma?style=for-the-badge&color=lightgreen">
+        <img alt="GitHub Forks" src="https://img.shields.io/github/forks/wvdhouten/enigma?style=for-the-badge&color=lightgreen">
     </a>
 </p>
 
@@ -57,7 +57,11 @@ var output = enigma.Encrypt(input);
 
 ### Custom configuration
 
-In order to encipher or decipher a text using a custom configuration the initial values must be defined using the `EnigmaMachineConfig`. The `EnigmaMachineConfig` requires a character set defined as a string.
+In order to encipher or decipher a text using a custom configuration the initial values must be defined using the `EnigmaMachineConfig`. The `EnigmaMachineConfig` requires:
+- a character set defined as a string,
+- a reflector which contains all the characters in the character set, with paired indexes (If the character at index 3 refers to index 7, the character at index 7 should refer to index 3, etc.)
+- 3 rotors which contain all characters in the character set as an encoding, an array of notch positions on which the rotor should turn over, the ringsetting and the starting position.
+- a plugboard that can contain any amount of pairs of unique characters in the character set.
 
 The sample code below will result in the input being deciphered to: `InordertoencipherordecipheratextusingacustomconfigurationtheinitialvaluesmustbedefinedusingtheEnigmaMachineConfig.`
 
@@ -69,10 +73,10 @@ var enigma = new EnigmaMachine(new EnigmaMachineConfig
 {
     CharacterSet = characterSet,
     Reflector = "bacHIXYvLoBTtRjsqMpmUhSQGEDkNAzPydeW.irCVFxnwluOJfg ZK",
-    Plugboard = "KhgCkpODjRorEuxqGbVJyidQWH",
     LeftRotor = new RotorConfig { Encoding = "Y.OZdwpIakLobKnDzCxShHjUcifgNtBurq RFevlWmJsPGTQMVXAyE", NotchPositions = [1], RingSetting = 49, Position = 48 },
     MiddleRotor = new RotorConfig { Encoding = "KQtyUXavbRfPrLBAZwHTElFJxqSeCkmDuiIsMon GcNO.jhVzWgYdp", NotchPositions = [44], RingSetting = 2, Position = 0 },
-    RightRotor = new RotorConfig { Encoding = "KixJIRLdVcCuBnErWQmhbpkAPjqXNzyYfvgsMalD.UF TwoeOZGHtS", NotchPositions = [27], RingSetting = 18, Position = 14 }
+    RightRotor = new RotorConfig { Encoding = "KixJIRLdVcCuBnErWQmhbpkAPjqXNzyYfvgsMalD.UF TwoeOZGHtS", NotchPositions = [27], RingSetting = 18, Position = 14 },
+    Plugboard = "KhgCkpODjRorEuxqGbVJyidQWH"
 }) { BlockSize = null };
 
 var output = enigma.Encipher(input);
