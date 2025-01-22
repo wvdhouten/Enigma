@@ -24,13 +24,13 @@ public class PlugboardTests
     {
         // Arrange
         var expected = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
-        var connections = "AB AC";
+        var connections = "ABAC";
 
         // Act
-        var plugboard = Plugboard.Create(connections, CharacterSet.Default);
+        Plugboard action() => Plugboard.Create(connections, CharacterSet.Default);
 
         // Assert
-        Assert.Equal(expected, plugboard.Wiring);
+        Assert.Throws<ArgumentException>(nameof(connections), action);
     }
 
     [Fact]
@@ -38,27 +38,26 @@ public class PlugboardTests
     {
         // Arrange
         var expected = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
-        var connections = "AB C";
+        var connections = "ABC";
 
         // Act
-        var plugboard = Plugboard.Create(connections, CharacterSet.Default);
+        Plugboard action() => Plugboard.Create(connections, CharacterSet.Default);
 
         // Assert
-        Assert.Equal(expected, plugboard.Wiring);
+        Assert.Throws<ArgumentException>(nameof(connections), action);
     }
 
     [Fact]
-    public void InvalidPair_SetsDefaultWiring()
+    public void InvalidPair_ThrowsException()
     {
         // Arrange
-        var expected = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
-        var connections = "AB C5";
+        var connections = "ABC5";
 
         // Act
-        var plugboard = Plugboard.Create(connections, CharacterSet.Default);
+        Plugboard action() => Plugboard.Create(connections, CharacterSet.Default);
 
         // Assert
-        Assert.Equal(expected, plugboard.Wiring);
+        Assert.Throws<ArgumentOutOfRangeException>(action);
     }
 
     [Fact]
@@ -66,7 +65,7 @@ public class PlugboardTests
     {
         // Arrange
         var expected = new[] { 25, 1, 23, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 2, 24, 0 };
-        var connections = "AZ CX";
+        var connections = "AZCX";
 
         // Act
         var plugboard = Plugboard.Create(connections, CharacterSet.Default);

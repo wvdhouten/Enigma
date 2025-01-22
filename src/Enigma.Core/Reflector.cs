@@ -23,13 +23,17 @@ public class Reflector
         return new Reflector(encoding, characterSet);
     }
 
-    public static Reflector CreateRandom(out string encoding, CharacterSet? characterSet = null)
+    public static Reflector CreateRandom(out string encoding, CharacterSet? characterSet = null, Random? random = null)
     {
+        random ??= new();
         characterSet ??= CharacterSet.Default;
-        encoding = characterSet.Characters.Shuffle();
+        encoding = characterSet.Characters.SwapPairs(random);
 
         return new Reflector(encoding, characterSet);
     }
 
-    internal int Resolve(int c) => Wiring[c];
+    internal int Resolve(int c)
+    {
+        return Wiring[c];
+    }
 }
