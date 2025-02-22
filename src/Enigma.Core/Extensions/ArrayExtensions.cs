@@ -1,4 +1,5 @@
 ﻿namespace Enigma.Core.Extensions;
+
 internal static class ArrayExtensions
 {
     public static string Shuffle(this string source, Random? random = null)

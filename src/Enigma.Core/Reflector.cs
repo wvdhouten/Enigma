@@ -1,6 +1,7 @@
+namespace Enigma.Core;
+
 using Enigma.Core.Extensions;
 
-namespace Enigma.Core;
 public class Reflector
 {
     internal int[] Wiring { get; private set; }

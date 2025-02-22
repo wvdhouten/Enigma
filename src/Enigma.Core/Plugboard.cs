@@ -1,7 +1,8 @@
+namespace Enigma.Core;
+
 using Enigma.Core.Extensions;
 
-namespace Enigma.Core;
-public partial class Plugboard
+public class Plugboard
 {
     internal int[] Wiring { get; }
 

@@ -1,7 +1,8 @@
+namespace Enigma.Core;
+
 using System.Text;
 using Enigma.Core.Config;
 
-namespace Enigma.Core;
 public class EnigmaMachine
 {
     public CharacterSet CharacterSet { get; }
@@ -92,12 +93,12 @@ public class EnigmaMachine
             if (BlockSize is not null && output.Length % (BlockSize + 1) == BlockSize)
                 output.Append(' ');
 
-            output.Append(Encrypt(index));
+            output.Append(Encipher(index));
         }
         return output.ToString();
     }
 
-    private char Encrypt(int index)
+    private char Encipher(int index)
     {
         Rotate();
 

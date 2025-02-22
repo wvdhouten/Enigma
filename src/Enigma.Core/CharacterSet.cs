@@ -1,7 +1,8 @@
-﻿using Enigma.Core.Extensions;
+﻿namespace Enigma.Core;
+
+using Enigma.Core.Extensions;
 using Enigma.Core.Utils;
 
-namespace Enigma.Core;
 public class CharacterSet
 {
     public static CharacterSet Default { get; } = new CharacterSet(Constants.BaseCharacterSet);
