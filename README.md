@@ -13,7 +13,7 @@ The project offers 3 different ways to configure the Enigma Machine. The default
 
 ## Getting Started
 
-### Installation
+### Installation & Usage
 
 The solution is implemented as a class library that can be integrated in other .NET Projects. (It currently does not have a NuGet package, so it needs to be compiled and added manually.)
 
